@@ -10,8 +10,4 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
     }
-
-    //oprea pizdicel
 }
-//   Ma cheama Oprea
-//Nu ma cheama Duncea
