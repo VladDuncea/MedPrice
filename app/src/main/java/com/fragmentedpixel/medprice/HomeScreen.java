@@ -11,3 +11,5 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
     }
 }
+// Ma cheama Oprea
+//Nu ma cheama Duncea
