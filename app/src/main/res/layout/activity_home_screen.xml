@@ -11,14 +11,14 @@
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:hint="Medicament:"
-
             android:id="@+id/editText" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            android:text="cauta"/>
+            android:text="cauta"
+            android:onClick="home_search"/>
 
     </LinearLayout>
     <ListView
