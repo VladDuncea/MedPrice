@@ -62,7 +62,10 @@ public class HomeScreen extends AppCompatActivity {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean logged = jsonResponse.getBoolean("success");
+                    //Toast.makeText(HomeScreen.this, "stai fa", Toast.LENGTH_SHORT).show();
+
                     if(logged){
+
                         String Name = jsonResponse.getString("Nume");
                         double Pret = jsonResponse.getDouble("Pret");
                         String Descriere = jsonResponse.getString("Descriere");
@@ -82,6 +85,7 @@ public class HomeScreen extends AppCompatActivity {
                         alert.setMessage("Login Failed").setNegativeButton("Retry",null).create().show();
                     }
                 } catch (JSONException e) {
+                    //Toast.makeText(HomeScreen.this, e.toString(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
@@ -96,7 +100,6 @@ public class HomeScreen extends AppCompatActivity {
 
     public void home_refresh(View view)
     {
-        Toast.makeText(HomeScreen.this, "stai fa", Toast.LENGTH_SHORT).show();
         search();
     }
 
