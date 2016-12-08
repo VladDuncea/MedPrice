@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
+            android:
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:hint="Medicament:"
