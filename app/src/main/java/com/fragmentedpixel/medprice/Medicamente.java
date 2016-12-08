@@ -1,6 +1,6 @@
 package com.fragmentedpixel.medprice;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
@@ -12,11 +12,11 @@ public class Medicamente
 
     private String denumire;
     private float pret;
-    private Image imagine;
+    private Bitmap imagine;
     private String descriere;
     private String ingrediente;
 
-    public Medicamente(String denumire, float pret, Image imagine, String descriere, String ingrediente)
+    public Medicamente(String denumire, float pret, Bitmap imagine, String descriere, String ingrediente)
     {
         this.denumire = denumire;
         this.pret = pret;
@@ -35,7 +35,7 @@ public class Medicamente
         return pret;
     }
 
-    public Image getImagine()
+    public Bitmap getImagine()
     {
         return imagine;
     }
