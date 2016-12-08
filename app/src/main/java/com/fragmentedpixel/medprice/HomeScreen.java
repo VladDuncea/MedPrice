@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.UpdateAppearance;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,8 +94,9 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    public void home_search()
+    public void home_refresh(View view)
     {
+        Toast.makeText(HomeScreen.this, "stai fa", Toast.LENGTH_SHORT).show();
         search();
     }
 

@@ -18,9 +18,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/button"
             android:text="cauta"
-            android:onClick="home_search"/>
+            android:onClick="home_refresh" />
 
     </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
