@@ -11,14 +11,31 @@
             android:layout_height="match_parent"
             android:id="@+id/pagina_med_poza"/>
         <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/pagina_med_nume"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/pagina_med_nume"/>
+            android:gravity="center"
+            android:id="@+id/pagina_med_pret"/>
 
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:id="@+id/pagina_med_descriere"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Ingrediente:"
+        android:textSize="25sp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pagina_med_ingred"/>
 
 </LinearLayout>
