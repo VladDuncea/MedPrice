@@ -65,7 +65,7 @@ public class Medicamente
         ArrayList<Medicamente> lista_filtrata = new ArrayList<>();
         for (Medicamente medicament : Medicamente.toateMedicamentele)
         {
-            if(medicament.getDenumire().contains(cautat))
+            if(medicament.getDenumire().toUpperCase().contains(cautat.toUpperCase()))
                 lista_filtrata.add(medicament);
         }
         return lista_filtrata;
