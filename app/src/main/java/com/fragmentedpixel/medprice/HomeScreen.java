@@ -79,12 +79,14 @@ public class HomeScreen extends AppCompatActivity {
                     int c = jsonResponse.getInt("contor");
 
                     if(logged){
-                        for(int i =1;i<=c;i++)
+                        for(int i = 1; i <= c; i++)
                         {
                             String Name = jsonResponse.getString("Nume"+i);
                             float Pret = (float) jsonResponse.getDouble("Pret"+i);
                             String Descriere = jsonResponse.getString("Descriere"+i);
-                            String Ingrediente = "DUNCEA PLS FIX THIS"; //TODO: DUNCEA PLS FIX THIS
+                            //TODO: DUNCEA PLS FIX THIS
+                            String Ingrediente = "DUNCEA PLS FIX THIS";
+                            //TODO: USE THIS : String Ingrediente = jsonResponse.getString("Ingrediente");
 
                             String Poza = jsonResponse.getString("Poza"+i);
                             byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar

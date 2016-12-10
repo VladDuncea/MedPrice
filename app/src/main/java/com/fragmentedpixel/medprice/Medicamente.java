@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Medicamente
 {
-    public static ArrayList<Medicamente> toateMedicamentele = new ArrayList<Medicamente>();
+    public static ArrayList<Medicamente> toateMedicamentele = new ArrayList<>();
     public static Medicamente medicamentAles;
 
     private String denumire;
@@ -15,6 +15,8 @@ public class Medicamente
     private Bitmap imagine;
     private String descriere;
     private String ingrediente;
+
+    private ArrayList<Medicamente> medicamente_similare = new ArrayList<>() ;
 
     public Medicamente(String denumire, float pret, Bitmap imagine, String descriere, String ingrediente)
     {
@@ -50,5 +52,11 @@ public class Medicamente
     public String getIngrediente()
     {
         return ingrediente;
+    }
+
+    public void SetMedicamenteSimilare()
+    {
+        // TODO: add this
+        // implementare Medicamenete Similare
     }
 }
