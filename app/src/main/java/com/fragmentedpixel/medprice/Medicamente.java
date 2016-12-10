@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Medicamente
 {
-    public static ArrayList<Medicamente> toateMedicamentele;
+    public static ArrayList<Medicamente> toateMedicamentele = new ArrayList<Medicamente>();
     public static Medicamente medicamentAles;
 
     private String denumire;
@@ -23,6 +23,8 @@ public class Medicamente
         this.imagine = imagine;
         this.descriere = descriere;
         this.ingrediente = ingrediente;
+
+        Medicamente.toateMedicamentele.add(this);
     }
 
     public String getDenumire()

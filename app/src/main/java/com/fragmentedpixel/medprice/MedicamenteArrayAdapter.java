@@ -25,7 +25,7 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        final Medicamente medicament = (Medicamente) this.getItem(position);
+        final Medicamente medicament = this.getItem(position);
         final TextView textView;
         final ImageView imagine;
 
@@ -37,7 +37,16 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
             imagine = (ImageView) convertView.findViewById(R.id.img_item);
 
             convertView.setTag(new MedicamenteViewHolder(textView, imagine));
-            //TODO: add on click listener
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Medicamente.medicamentAles = medicament;
+//                    Context context = getContext();
+//                    Intent intent = new Intent(context,SubMedicamenteActivity.class);
+//                    context.startActivity(intent);
+                }
+            });
         }
         else
         {

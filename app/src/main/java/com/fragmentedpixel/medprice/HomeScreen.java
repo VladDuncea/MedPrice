@@ -1,20 +1,16 @@
 package com.fragmentedpixel.medprice;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.style.UpdateAppearance;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,21 +23,19 @@ import java.io.UnsupportedEncodingException;
 
 public class HomeScreen extends AppCompatActivity {
 
-
-    private ImageView image_test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        link();
 
+        link();
+        UpdateDB();
     }
 
     private void link()
     {
         EditText search_bar;
         search_bar=(EditText) findViewById(R.id.editText);
-        image_test=(ImageView) findViewById(R.id.image_test);
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -60,7 +54,20 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
-    public void search(){
+    public void home_refresh(View view)
+    {
+        PopulateList();
+    }
+
+    private void PopulateList()
+    {
+        ListView listView = (ListView) findViewById(R.id.lista_medicamente);
+        MedicamenteArrayAdapter listAdapter;
+        listAdapter = new MedicamenteArrayAdapter(this, Medicamente.toateMedicamentele);
+        listView.setAdapter(listAdapter);
+    }
+
+    public void UpdateDB(){
         final EditText etName = (EditText) findViewById(R.id.editText);
         final String Name = etName.getText().toString();
         Response.Listener<String> loginListener = new Response.Listener<String>() {
@@ -70,20 +77,21 @@ public class HomeScreen extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean logged = jsonResponse.getBoolean("success");
                     int c = jsonResponse.getInt("contor");
-                    //Toast.makeText(HomeScreen.this, "response", Toast.LENGTH_SHORT).show();
 
                     if(logged){
                         for(int i =1;i<=c;i++)
                         {
                             String Name = jsonResponse.getString("Nume"+i);
-                            double Pret = jsonResponse.getDouble("Pret"+i);
+                            float Pret = (float) jsonResponse.getDouble("Pret"+i);
                             String Descriere = jsonResponse.getString("Descriere"+i);
+                            String Ingrediente = "DUNCEA PLS FIX THIS"; //TODO: DUNCEA PLS FIX THIS
+
                             String Poza = jsonResponse.getString("Poza"+i);
                             byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
                             byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
                             Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
-                            image_test.setImageBitmap(bm);
-                            Toast.makeText(HomeScreen.this,Name+Pret+Descriere,Toast.LENGTH_LONG).show();
+
+                            Medicamente medicament = new Medicamente(Name, Pret, bm, Descriere, Ingrediente);
                         }
                     }
                     else{
@@ -91,7 +99,6 @@ public class HomeScreen extends AppCompatActivity {
                         alert.setMessage("Login Failed").setNegativeButton("Retry",null).create().show();
                     }
                 } catch (JSONException | UnsupportedEncodingException e) {
-                    //Toast.makeText(HomeScreen.this, e.toString(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
@@ -103,10 +110,4 @@ public class HomeScreen extends AppCompatActivity {
         loginQueue.add(loginRequest);
 
     }
-
-    public void home_refresh(View view)
-    {
-        search();
-    }
-
 }
