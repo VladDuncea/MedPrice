@@ -68,29 +68,22 @@ public class HomeScreen extends AppCompatActivity {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean logged = jsonResponse.getBoolean("success");
+                    int c = jsonResponse.getInt("contor");
                     //Toast.makeText(HomeScreen.this, "stai fa", Toast.LENGTH_SHORT).show();
 
                     if(logged){
-
-                        String Name = jsonResponse.getString("Nume");
-                        double Pret = jsonResponse.getDouble("Pret");
-                        String Descriere = jsonResponse.getString("Descriere");
-                        String Poza = jsonResponse.getString("Poza");
-
-                        byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
-                        byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
-                        Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
-                        image_test.setImageBitmap(bm);//seteaza imageView
-                        //String Username = jsonResponse.getString("Username");
-
-                       /* Intent intent = new Intent(HomeScreen.this,HomeScreen.class);
-                        intent.putExtra("FirstName",FirstName);
-                        intent.putExtra("LastName",LastName);
-                        intent.putExtra("Email",Email);
-                        //intent.putExtra("Username",Username);
-                        HomeScreen.this.startActivity(intent);*/
-
-                        Toast.makeText(HomeScreen.this,Name+Pret+Descriere,Toast.LENGTH_LONG).show();
+                        for(int i =1;i<=c;i++)
+                        {
+                            String Name = jsonResponse.getString("Nume"+i);
+                            double Pret = jsonResponse.getDouble("Pret"+i);
+                            String Descriere = jsonResponse.getString("Descriere"+i);
+                            String Poza = jsonResponse.getString("Poza"+i);
+                            byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
+                            byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
+                            Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
+                            image_test.setImageBitmap(bm);
+                            Toast.makeText(HomeScreen.this,Name+Pret+Descriere,Toast.LENGTH_LONG).show();
+                        }
                     }
                     else{
                         AlertDialog.Builder alert = new AlertDialog.Builder(HomeScreen.this);
