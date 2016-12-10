@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -78,30 +79,24 @@ public class HomeScreen extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-                    boolean logged = jsonResponse.getBoolean("success");
                     int c = jsonResponse.getInt("contor");
+                    for(int i = 1; i <= c; i++)
+                    {
+                        String Name = jsonResponse.getString("Nume"+i);
+                        float Pret = (float) jsonResponse.getDouble("Pret"+i);
+                        String Descriere = jsonResponse.getString("Descriere"+i);
+                        String Ingrediente = jsonResponse.getString("Ingrediente"+i);
 
-                    if(logged){
-                        for(int i = 1; i <= c; i++)
-                        {
-                            String Name = jsonResponse.getString("Nume"+i);
-                            float Pret = (float) jsonResponse.getDouble("Pret"+i);
-                            String Descriere = jsonResponse.getString("Descriere"+i);
-                            String Ingrediente = jsonResponse.getString("Ingrediente"+i);
+                        String Poza = jsonResponse.getString("Poza"+i);
+                        byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
+                        byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
+                        Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
 
-                            String Poza = jsonResponse.getString("Poza"+i);
-                            byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
-                            byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
-                            Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
-
-                            Medicamente medicament = new Medicamente(Name, Pret, bm, Descriere, Ingrediente);
-                        }
+                        Medicamente medicament = new Medicamente(Name, Pret, bm, Descriere, Ingrediente);
                     }
-                    else{
-                        AlertDialog.Builder alert = new AlertDialog.Builder(HomeScreen.this);
-                        alert.setMessage("Login Failed").setNegativeButton("Retry",null).create().show();
-                    }
+
                 } catch (JSONException | UnsupportedEncodingException e) {
+                    Toast.makeText(HomeScreen.this, e.toString(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
