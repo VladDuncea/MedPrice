@@ -1,6 +1,7 @@
 package com.fragmentedpixel.medprice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +45,9 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
                 @Override
                 public void onClick(View view) {
                     Medicamente.medicamentAles = medicament;
-                    //TODO: Complete this wiht the new activity
-//                    Context context = getContext();
-//                    Intent intent = new Intent(context,SubMedicamenteActivity.class);
-//                    context.startActivity(intent);
+                    Context context = getContext();
+                    Intent intent = new Intent(context,MedicamentePage.class);
+                    context.startActivity(intent);
                 }
             });
         }
