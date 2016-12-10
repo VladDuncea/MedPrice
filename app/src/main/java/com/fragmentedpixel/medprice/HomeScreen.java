@@ -113,6 +113,5 @@ public class HomeScreen extends AppCompatActivity {
         Update_Home loginRequest = new Update_Home(Name,loginListener);
         RequestQueue loginQueue = Volley.newRequestQueue(HomeScreen.this);
         loginQueue.add(loginRequest);
-
     }
 }

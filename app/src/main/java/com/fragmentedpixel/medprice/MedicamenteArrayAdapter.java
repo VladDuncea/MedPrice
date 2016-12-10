@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
@@ -39,7 +37,8 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
             textView = (TextView) convertView.findViewById(R.id.txt_item);
             imagine = (ImageView) convertView.findViewById(R.id.img_item);
             pretView = (TextView) convertView.findViewById(R.id.pret_item);
-            convertView.setTag(new MedicamenteViewHolder(textView, imagine));
+
+            convertView.setTag(new MedicamenteViewHolder(textView, imagine, pretView));
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,9 +54,10 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
         else
         {
             MedicamenteViewHolder viewHolder = (MedicamenteViewHolder) convertView.getTag();
+
             textView = viewHolder.getTextView();
             imagine = viewHolder.getImage();
-            pretView = viewHolder.getTextView();
+            pretView = viewHolder.getPretView();
         }
 
         textView.setTag(medicament);
