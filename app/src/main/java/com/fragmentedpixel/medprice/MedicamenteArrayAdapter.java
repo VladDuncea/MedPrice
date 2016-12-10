@@ -64,7 +64,7 @@ public class MedicamenteArrayAdapter extends ArrayAdapter<Medicamente>
 
         assert medicament != null;
         textView.setText(medicament.getDenumire());
-        pretView.setText(""+medicament.getPret());
+        pretView.setText(""+medicament.getPret()+"LEI");
         imagine.setImageBitmap(medicament.getImagine());
 
         return  convertView;
