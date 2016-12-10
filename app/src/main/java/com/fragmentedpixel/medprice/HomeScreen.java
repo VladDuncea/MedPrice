@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -63,7 +64,9 @@ public class HomeScreen extends AppCompatActivity {
     {
         ListView listView = (ListView) findViewById(R.id.lista_medicamente);
         MedicamenteArrayAdapter listAdapter;
-        listAdapter = new MedicamenteArrayAdapter(this, Medicamente.toateMedicamentele);
+        EditText searchedText = (EditText) findViewById(R.id.editText);
+        ArrayList<Medicamente> lista = Medicamente.Filter(searchedText.getText().toString());
+        listAdapter = new MedicamenteArrayAdapter(this, lista);
         listView.setAdapter(listAdapter);
     }
 

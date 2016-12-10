@@ -59,4 +59,15 @@ public class Medicamente
         // TODO: add this
         // implementare Medicamenete Similare
     }
+
+    public static ArrayList<Medicamente> Filter (String cautat)
+    {
+        ArrayList<Medicamente> lista_filtrata = new ArrayList<>();
+        for (Medicamente medicament : Medicamente.toateMedicamentele)
+        {
+            if(medicament.getDenumire().contains(cautat))
+                lista_filtrata.add(medicament);
+        }
+        return lista_filtrata;
+    }
 }
