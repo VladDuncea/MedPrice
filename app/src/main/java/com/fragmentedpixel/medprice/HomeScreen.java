@@ -1,14 +1,18 @@
 package com.fragmentedpixel.medprice;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.UpdateAppearance;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,22 +23,24 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 public class HomeScreen extends AppCompatActivity {
 
     private EditText search_bar;
+    private ImageView image_test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         link();
-        //byte[] byteArray = DBcursor.getBlob(columnIndex);
 
-       // Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
     }
 
     private void link()
     {
         search_bar=(EditText) findViewById(R.id.editText);
+        image_test=(ImageView) findViewById(R.id.image_test);
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -69,6 +75,12 @@ public class HomeScreen extends AppCompatActivity {
                         String Name = jsonResponse.getString("Nume");
                         double Pret = jsonResponse.getDouble("Pret");
                         String Descriere = jsonResponse.getString("Descriere");
+                        String Poza = jsonResponse.getString("Poza");
+
+                        byte[] byteArray = Poza.getBytes("UTF-16");  //Transforma poza in binar
+                        byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
+                        Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
+                        image_test.setImageBitmap(bm);//seteaza imageView
                         //String Username = jsonResponse.getString("Username");
 
                        /* Intent intent = new Intent(HomeScreen.this,HomeScreen.class);
@@ -86,6 +98,8 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     //Toast.makeText(HomeScreen.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
