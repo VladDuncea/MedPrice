@@ -27,7 +27,7 @@ import java.io.UnsupportedEncodingException;
 
 public class HomeScreen extends AppCompatActivity {
 
-    private EditText search_bar;
+
     private ImageView image_test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private void link()
     {
+        EditText search_bar;
         search_bar=(EditText) findViewById(R.id.editText);
         image_test=(ImageView) findViewById(R.id.image_test);
         search_bar.addTextChangedListener(new TextWatcher() {
@@ -69,7 +70,7 @@ public class HomeScreen extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean logged = jsonResponse.getBoolean("success");
                     int c = jsonResponse.getInt("contor");
-                    //Toast.makeText(HomeScreen.this, "stai fa", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeScreen.this, "response", Toast.LENGTH_SHORT).show();
 
                     if(logged){
                         for(int i =1;i<=c;i++)
@@ -89,10 +90,8 @@ public class HomeScreen extends AppCompatActivity {
                         AlertDialog.Builder alert = new AlertDialog.Builder(HomeScreen.this);
                         alert.setMessage("Login Failed").setNegativeButton("Retry",null).create().show();
                     }
-                } catch (JSONException e) {
+                } catch (JSONException | UnsupportedEncodingException e) {
                     //Toast.makeText(HomeScreen.this, e.toString(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
