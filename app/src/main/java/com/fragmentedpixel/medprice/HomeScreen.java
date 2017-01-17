@@ -32,6 +32,8 @@ public class HomeScreen extends AppCompatActivity {
         //dUNCEA 45
         link();
         UpdateDB();
+        home_refresh(null);
+
     }
 
     private void link()
@@ -67,6 +69,7 @@ public class HomeScreen extends AppCompatActivity {
         MedicamenteArrayAdapter listAdapter;
         EditText searchedText = (EditText) findViewById(R.id.editText);
         ArrayList<Medicamente> lista = Medicamente.Filter(searchedText.getText().toString());
+
         listAdapter = new MedicamenteArrayAdapter(this, lista);
         listView.setAdapter(listAdapter);
     }

@@ -27,15 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/pagina_med_descriere"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Ingrediente:"
-        android:textSize="25sp"
-        android:gravity="center_vertical"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pagina_med_ingred"/>
+
+
 
 </LinearLayout>
