@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -25,8 +26,21 @@
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/pagina_med_descriere"/>
+        android:layout_height="48dp"
+        android:id="@+id/substanta_activa"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/Similare"
+        tools:text="Similare"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lista_medicamente_similare">
+
+    </ListView>
 
 
 

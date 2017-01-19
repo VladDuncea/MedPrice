@@ -13,18 +13,15 @@ public class Medicamente
     private String denumire;
     private float pret;
     private Bitmap imagine;
-    private String descriere;
-    private String ingrediente;
+    private String substanta_activa;
 
-    private ArrayList<Medicamente> medicamente_similare = new ArrayList<>() ;
 
-    public Medicamente(String denumire, float pret, Bitmap imagine, String descriere, String ingrediente)
+    public Medicamente(String denumire, float pret, Bitmap imagine, String ingrediente)
     {
         this.denumire = denumire;
         this.pret = pret;
         this.imagine = imagine;
-        this.descriere = descriere;
-        this.ingrediente = ingrediente;
+        this.substanta_activa = ingrediente;
 
         Medicamente.toateMedicamentele.add(this);
     }
@@ -44,20 +41,24 @@ public class Medicamente
         return imagine;
     }
 
-    public String getDescriere()
+    public String getSubstanta_activa()
     {
-        return descriere;
+        return substanta_activa;
     }
 
-    public String getIngrediente()
+    public static ArrayList<Medicamente> FilterSimilare ()
     {
-        return ingrediente;
-    }
+        String cautat = medicamentAles.getSubstanta_activa();
 
-    public void SetMedicamenteSimilare()
-    {
-        // TODO: add this
-        // implementare Medicamenete Similare
+        ArrayList<Medicamente> lista_filtrata = new ArrayList<>();
+        for (Medicamente medicament : Medicamente.toateMedicamentele)
+        {
+            if(medicament.getSubstanta_activa().toUpperCase().contains(cautat.toUpperCase()))
+                lista_filtrata.add(medicament);
+        }
+        lista_filtrata.remove(medicamentAles);
+
+        return lista_filtrata;
     }
 
     public static ArrayList<Medicamente> Filter (String cautat)

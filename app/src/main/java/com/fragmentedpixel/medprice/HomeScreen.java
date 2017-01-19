@@ -3,10 +3,7 @@ package com.fragmentedpixel.medprice;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
@@ -25,35 +22,34 @@ import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
+    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        //dUNCEA 45
-        link();
-        UpdateDB();
-        home_refresh(null);
 
+        UpdateDB();
+        link();
+    }
+
+    @Override
+    protected  void onStart()
+    {
+        super.onStart();
     }
 
     private void link()
     {
+        listView = (ListView) findViewById(R.id.lista_medicamente);
+
         EditText search_bar;
         search_bar=(EditText) findViewById(R.id.editText);
-        search_bar.addTextChangedListener(new TextWatcher() {
+
+        search_bar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //refresh();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+            public void onFocusChange(View view, boolean b) {
+                PopulateList();
             }
         });
     }
@@ -65,7 +61,6 @@ public class HomeScreen extends AppCompatActivity {
 
     private void PopulateList()
     {
-        ListView listView = (ListView) findViewById(R.id.lista_medicamente);
         MedicamenteArrayAdapter listAdapter;
         EditText searchedText = (EditText) findViewById(R.id.editText);
         ArrayList<Medicamente> lista = Medicamente.Filter(searchedText.getText().toString());
@@ -80,6 +75,7 @@ public class HomeScreen extends AppCompatActivity {
         Response.Listener<String> loginListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Medicamente.toateMedicamentele.clear();
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     int c = jsonResponse.getInt("contor");
@@ -87,7 +83,6 @@ public class HomeScreen extends AppCompatActivity {
                     {
                         String Name = jsonResponse.getString("Nume"+i);
                         float Pret = (float) jsonResponse.getDouble("Pret"+i);
-                        String Descriere = jsonResponse.getString("Descriere"+i);
                         String Ingrediente = jsonResponse.getString("Ingrediente"+i);
 
                         String Poza = jsonResponse.getString("Poza"+i);
@@ -95,7 +90,7 @@ public class HomeScreen extends AppCompatActivity {
                         byte[] data = Base64.decode(byteArray, Base64.DEFAULT); // decodeaza poza cryptata in base 64
                         Bitmap bm = BitmapFactory.decodeByteArray(data, 0 ,data.length); //transforma in bitemap
 
-                        Medicamente medicament = new Medicamente(Name, Pret, bm, Descriere, Ingrediente);
+                        Medicamente medicament = new Medicamente(Name, Pret, bm, Ingrediente);
                     }
 
                 } catch (JSONException | UnsupportedEncodingException e) {
